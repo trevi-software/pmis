@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# Copyright 2015 Eficent - Jordi Ballester Alomar
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 
 class AnalyticAccountOpen(models.TransientModel):
@@ -13,7 +15,8 @@ class AnalyticAccountOpen(models.TransientModel):
         required=True
     )
     include_child = fields.Boolean(
-        'Include child accounts', default=True
+        'Include child accounts',
+        default=True
     )
 
     @api.model
@@ -42,20 +45,13 @@ class AnalyticAccountOpen(models.TransientModel):
     def analytic_account_open_window(self):
         self.ensure_one()
         act_window_id = self.env.ref(
-            'account.action_account_analytic_account_form'
-        )
+            'analytic.action_account_analytic_account_form')
         result = act_window_id.read()[0]
-        data = self.read([])[0]
-        acc_id = data['analytic_account_id'][0]
+        acc_id = self.analytic_account_id.id
         acc_ids = []
-
-        if data['include_child']:
-            acc_ids = self._get_child_analytic_accounts(
-                acc_id
-            )
+        if self.include_child:
+            acc_ids = self._get_child_analytic_accounts(acc_id)
         else:
             acc_ids.append(acc_id)
-
         result['domain'] = "[('id','in', ["+','.join(map(str, acc_ids))+"])]"
-
         return result
