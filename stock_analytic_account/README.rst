@@ -9,13 +9,11 @@ Project Procurement
 -------------------
 Features of this module:
 
-* Adds the analytic account to the stock move
+* Adds the analytic account to the stock move and quants
 * Makes it possible to search stock moves by analytic account or its
   project manager
 * Makes it possible to search picking lists by analytic account or its
   project manager
-* Adds button in the Project Form and an Action from Project's 'More'
-  menu to list the Procurement Orders associated to the selected project.
 
 Installation
 ============
@@ -29,6 +27,8 @@ Contributors
 ------------
 
 * Eficent <http://www.eficent.com>
+* Matmoz d.o.o. <http://www.matmoz.si>
+* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainer
 ----------
